@@ -238,7 +238,7 @@ const inactivityChecker = setInterval(() => {
     if (Date.now() - lastActivityTimestamp >= INACTIVITY_LIMIT) {
         stopAllTimers()
     }
-}, 10000) // toutes les 10 secondes
+}, 10000)
 
 // Nettoyage au démontage du composant
 onUnmounted(() => {

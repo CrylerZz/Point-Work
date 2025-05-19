@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  base: '/Point-Work/',
   plugins: [
     vue(),
     tailwindcss(),
@@ -13,18 +14,18 @@ export default defineConfig({
       manifest: {
         name: 'Pointage App',
         short_name: 'Pointage',
-        start_url: '/',
+        start_url: '/Point-Work/',
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#1a1a1a',
         icons: [
           {
-            src: '/icons/icon-192.png',
+            src: '/Point-Work/icons/icon-192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/icons/icon-512.png',
+            src: '/Point-Work/icons/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
           },
@@ -36,5 +37,5 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  }
+  },
 })
