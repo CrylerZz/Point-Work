@@ -208,46 +208,5 @@ const filteredProjects = computed(() =>
     projects.value.filter((p) => p.archived === showArchived.value)
 )
 
-const INACTIVITY_LIMIT =  2 * 60 * 1000
-let lastActivityTimestamp = Date.now()
-
-// Met à jour le timestamp de dernière activité
-function updateActivity() {
-    lastActivityTimestamp = Date.now()
-}
-
-// Arrête tous les timers actifs
-function stopAllTimers() {
-    projects.value.forEach((project) => {
-        if (project.runningSince) {
-            const now = Date.now()
-            const elapsed = Math.floor((now - project.runningSince) / 1000)
-            project.time += elapsed
-            project.runningSince = null
-        }
-    })
-}
-
-// Écoute des événements d’activité utilisateur
-window.addEventListener('mousemove', updateActivity)
-window.addEventListener('keydown', updateActivity)
-window.addEventListener('scroll', updateActivity)
-window.addEventListener('touchstart', updateActivity)
-
-// Vérification périodique de l’inactivité
-const inactivityChecker = setInterval(() => {
-    if (Date.now() - lastActivityTimestamp >= INACTIVITY_LIMIT) {
-        stopAllTimers()
-    }
-}, 10000)
-
-// Nettoyage au démontage du composant
-onUnmounted(() => {
-    clearInterval(inactivityChecker)
-    window.removeEventListener('mousemove', updateActivity)
-    window.removeEventListener('keydown', updateActivity)
-    window.removeEventListener('scroll', updateActivity)
-    window.removeEventListener('touchstart', updateActivity)
-})
 
 </script>
